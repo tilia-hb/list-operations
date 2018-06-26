@@ -100,9 +100,19 @@ def custom_insert(input_list, index, value):
         True
 
     """
-    for i in range(len(input_list)):
-        pass
+    head = input_list[:index]
+    tail = input_list[index:]
+    
+    input_list.append(None)
+    for i in range(0,len(input_list),-1):
+        if i != index:
+            del input_list[i]
+        elif i == index:
+            input_list[i] = value
+            break
+    input_list.extend(tail)
 
+        
 
 
 
@@ -121,8 +131,11 @@ def custom_remove(input_list, value):
         True
 
     """
+    for i in enumerate(input_list):
+        if i[1] == value:
+            del input_list[i[0]]
 
-    pass
+
 
 
 def custom_pop(input_list):
@@ -141,7 +154,7 @@ def custom_pop(input_list):
 
     """
     value = input_list[-1]
-    input_list = input_list[:-1]
+    del input_list[-1]
     return value
 
 
@@ -248,8 +261,12 @@ def custom_equality(some_list, another_list):
         False
 
     """
-
-    return None
+    if len(some_list) != len(another_list):
+        return False
+    for i in range(len(some_list)):
+        if some_list[i] != another_list[i]:
+            return False
+    return True
 
 
 ##############################################################################
